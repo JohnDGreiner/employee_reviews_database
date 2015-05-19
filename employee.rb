@@ -5,15 +5,7 @@ ActiveRecord::Base.establish_connection(
   database: 'employee_reviews_db.sqlite3')
 
 class Employee < ActiveRecord::Base
-  attr_reader :name, :email, :phone, :salary, :satisfactory
-
-  def initialize(name:, email:, phone:, salary:)
-    @name = name
-    @email = email
-    @phone = phone
-    @salary = salary
-    @satisfactory = nil
-  end
+  belongs_to :department
 
   # use to add a review to a employee
   def add_review(review)

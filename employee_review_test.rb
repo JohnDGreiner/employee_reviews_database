@@ -32,35 +32,37 @@ class EmployeeReviewTest < Minitest::Test
   end
 
   def test_create_department_name
-    department = Department.new(name: "Development")
+    Department.create(name: "Development")
 
-    assert_equal "Development", department.name
+    assert_equal "Development", Department.last.name
   end
 
-  def test_create_employee
-    department = Department.new(name: "Development")
+  def test_save_employee
+    Employee.create(name: "Dutch Matrix", email: "Commando@example.com", phone_number: "919-877-1276", salary: 90000)
 
-    Employee.new(name: "Dutch Matrix", email: "Commando@example.com", phone: "919-877-1276", salary: 90000)
+    assert_equal "Dutch Matrix", Employee.last.name
+    assert_equal 1, Employee.count
   end
 
   def test_get_employee_name
-    department = Department.new(name: "Development")
-    employee = Employee.new(name: "Dutch Matrix", email: "Commando@example.com", phone: "919-877-1276", salary: 90000)
+    Department.create(name: "Development")
+    Employee.create(name: "Dutch Matrix", email: "Commando@example.com", phone_number: "919-877-1276", salary: 90000)
 
-    assert_equal "Dutch Matrix", employee.name
+    assert_equal "Dutch Matrix", Employee.last.name
   end
 
   def test_get_employee_email
-    department = Department.new(name: "Development")
-    employee = Employee.new(email: "Commando@example.com", phone: "919-877-1276", salary: 90000, name: "Dutch Matrix")
+    Department.create(name: "Development")
+    Employee.create(email: "Commando@example.com", phone_number: "919-877-1276", salary: 90000, name: "Dutch Matrix")
 
-    assert_equal "Commando@example.com", employee.email
+    assert_equal "Commando@example.com", Employee.last.email
   end
 
   def test_get_employee_phone
-    department = Department.new(name: "Development")
-    employee = Employee.new(name: "Dutch Matrix", email: "Commando@example.com", phone: "919-877-1276", salary: 90000)
-    assert_equal "919-877-1276", employee.phone
+    Department.create(name: "Development")
+    Employee.create(name: "Dutch Matrix", email: "Commando@example.com", phone_number: "919-877-1276", salary: 90000)
+
+    assert_equal "919-877-1276", Employee.last.phone_number
   end
 
   # def test_get_employee_salary
