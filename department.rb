@@ -30,4 +30,7 @@ class Department < ActiveRecord::Base
     employees.order(:salary).first.name
   end
 
+  def alphabetize_a
+    employees.order(:name).map {|a| a.name}
+  end
 end

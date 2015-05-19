@@ -146,7 +146,7 @@ class EmployeeReviewTest < Minitest::Test
     assert_equal 1, sales.employees_count
   end
 
-  def test_create_department_name
+  def test_get_lowest_paid_employee_name
     development = Department.create(name: "Development")
     employee_one = Employee.create(name: "Clark Kent", email: "superman@example.com", phone_number: "111-111-1111", salary: 90000)
     employee_two = Employee.create(name: "Barry Allen", email: "flash@example.com", phone_number: "222-222-2222", salary: 50000)
@@ -156,8 +156,18 @@ class EmployeeReviewTest < Minitest::Test
     development.add_employee(employee_three)
 
     assert_equal "Oliver Queen", development.lowest_salary
+  end
 
+  def test_order_employees_by_name
+    development = Department.create(name: "Development")
+    employee_one = Employee.create(name: "Clark Kent", email: "superman@example.com", phone_number: "111-111-1111", salary: 90000)
+    employee_two = Employee.create(name: "Barry Allen", email: "flash@example.com", phone_number: "222-222-2222", salary: 50000)
+    employee_three = Employee.create(name: "Oliver Queen", email: "green@example.com", phone_number: "333-333-3333", salary: 10000)
+    development.add_employee(employee_one)
+    development.add_employee(employee_two)
+    development.add_employee(employee_three)
 
+    assert_equal ["Barry Allen", "Clark Kent", "Oliver Queen"], development.alphabetize_a
   end
   #
   # def test_add_review_to_employee
