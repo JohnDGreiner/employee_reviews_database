@@ -1,13 +1,10 @@
-class Department
-  attr_reader :name
+require './db_require'
 
-  def initialize(name)
-    @name = name
-    @employees = []
-  end
+class Department <ActiveRecord::Base
+  has_many :employees
 
   def add_employee(employee)
-    @employees << employee
+    employees << employee
   end
 
   # total the salaries of all employees in a department

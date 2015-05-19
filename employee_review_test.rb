@@ -3,9 +3,29 @@ require 'minitest/pride'
 
 #Note: This line is going to fail first.
 require './department.rb'
-require './employee'
+require './employee.rb'
+
+ActiveRecord::Base.establish_connection(
+  adapter: 'sqlite3',
+  database: 'test.sqlite3'
+  )
+
+ActiveRecord::Migration.verbose = false
 
 class EmployeeReviewTest < Minitest::Test
+
+  def setup
+    DepartmentsMigration.migrate(:up)
+    EmployeesMigration.migrate(:up)
+    EmailsMigration.migrate(:up)
+  end
+
+  def teardown
+    DepartmentsMigration.migrate(:down)
+    EmployeesMigration.migrate(:down)
+    EmailsMigration.migrate(:down)
+  end
+
 
   def test_department_exists
     assert Department
