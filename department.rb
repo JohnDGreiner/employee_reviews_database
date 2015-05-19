@@ -13,9 +13,7 @@ class Department < ActiveRecord::Base
 
   # total the salaries of all employees in a department
   def salary_total
-    s_total = 0
-    @employees.map {|e| s_total += e.salary}
-    s_total
+    employees.map {|e| e.salary}.reduce(:+)
   end
 
   # give a raise to employees in a department based on conditions in a block

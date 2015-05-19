@@ -65,29 +65,30 @@ class EmployeeReviewTest < Minitest::Test
     assert_equal "919-877-1276", Employee.last.phone_number
   end
 
-  # def test_get_employee_salary
-  #   department = Department.new("Development")
-  #   employee = Employee.new(name: "Dutch Matrix", email: "Commando@example.com", phone: "919-877-1276", salary: 90000)
-  #
-  #   assert_equal 90000, employee.salary
-  # end
-  #
-  # def test_add_employee_to_department
-  #   department = Department.new("Development")
-  #   employee = Employee.new(name: "Dutch Matrix", email: "Commando@example.com", phone: "919-877-1276", salary: 90000)
-  #
-  #   assert department.add_employee(employee)
-  # end
-  #
-  # def test_total_salaries_of_a_department
-  #   department = Department.new("Development")
-  #   employee_one = Employee.new(name: "Dutch Matrix", email: "Commando@example.com", phone: "919-877-1276", salary: 90000)
-  #   employee_two = Employee.new(name: "John Rambo", email: "Rambo@example.com", phone: "919-999-1276", salary: 10000)
-  #
-  #   assert department.add_employee(employee_one)
-  #   assert department.add_employee(employee_two)
-  #   assert_equal 100000, department.salary_total
-  # end
+  def test_get_employee_salary
+    Department.create(name: "Development")
+    Employee.create(name: "Dutch Matrix", email: "Commando@example.com", phone_number: "919-877-1276", salary: 90000)
+
+    assert_equal 90000, Employee.last.salary
+  end
+
+  def test_add_employee_to_department
+    development = Department.create(name: "Development")
+    employee = Employee.create(name: "Dutch Matrix", email: "Commando@example.com", phone_number: "919-877-1276", salary: 90000)
+
+    assert development.add_employee(employee)
+    assert_equal development.id, Employee.last.department_id
+  end
+
+  def test_total_salaries_of_a_department
+    department = Department.create(name: "Development")
+    employee_one = Employee.create(name: "Dutch Matrix", email: "Commando@example.com", phone_number: "919-877-1276", salary: 90000)
+    employee_two = Employee.create(name: "John Rambo", email: "Rambo@example.com", phone_number: "919-999-1276", salary: 10000)
+
+    assert department.add_employee(employee_one)
+    assert department.add_employee(employee_two)
+    assert_equal 100000, department.salary_total
+  end
   #
   # def test_add_review_to_employee
   #   employee_one = Employee.new(name: "Dutch Matrix", email: "Commando@example.com", phone: "919-877-1276", salary: 90000)
