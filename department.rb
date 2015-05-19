@@ -22,4 +22,12 @@ class Department < ActiveRecord::Base
     need_raise.each { |e| e.give_raise(amount/need_raise.length)}
   end
 
+  def employees_count
+    employees.count
+  end
+
+  def lowest_salary
+    employees.order(:salary).first.name
+  end
+
 end
