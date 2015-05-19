@@ -37,18 +37,18 @@ class EmployeeReviewTest < Minitest::Test
     assert_equal "Development", department.name
   end
 
-  # def test_create_employee
-  #   department = Department.new("Development")
-  #
-  #   Employee.new(name: "Dutch Matrix", email: "Commando@example.com", phone: "919-877-1276", salary: 90000)
-  # end
-  #
-  # def test_get_employee_name
-  #   department = Department.new("Development")
-  #   employee = Employee.new(name: "Dutch Matrix", email: "Commando@example.com", phone: "919-877-1276", salary: 90000)
-  #
-  #   assert_equal "Dutch Matrix", employee.name
-  # end
+  def test_create_employee
+    department = Department.new(name: "Development")
+
+    Employee.new(name: "Dutch Matrix", email: "Commando@example.com", phone: "919-877-1276", salary: 90000)
+  end
+
+  def test_get_employee_name
+    department = Department.new(name: "Development")
+    employee = Employee.new(name: "Dutch Matrix", email: "Commando@example.com", phone: "919-877-1276", salary: 90000)
+
+    assert_equal "Dutch Matrix", employee.name
+  end
   #
   # def test_get_employee_email
   #   department = Department.new("Development")
