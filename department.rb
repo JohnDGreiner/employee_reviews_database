@@ -18,7 +18,7 @@ class Department < ActiveRecord::Base
 
   # give a raise to employees in a department based on conditions in a block
   def give_raise(amount)
-    need_raise = @employees.select { |e| yield(e)}
+    need_raise = employees.select { |e| yield(e)}
     need_raise.each { |e| e.give_raise(amount/need_raise.length)}
   end
 
