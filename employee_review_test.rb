@@ -169,6 +169,18 @@ class EmployeeReviewTest < Minitest::Test
 
     assert_equal ["Barry Allen", "Clark Kent", "Oliver Queen"], development.alphabetize_a
   end
+
+  def test_higher_than_average_salaries
+    development = Department.create(name: "Development")
+    employee_one = Employee.create(name: "Clark Kent", email: "superman@example.com", phone_number: "111-111-1111", salary: 90000)
+    employee_two = Employee.create(name: "Barry Allen", email: "flash@example.com", phone_number: "222-222-2222", salary: 50000)
+    employee_three = Employee.create(name: "Oliver Queen", email: "green@example.com", phone_number: "333-333-3333", salary: 10000)
+    development.add_employee(employee_one)
+    development.add_employee(employee_two)
+    development.add_employee(employee_three)
+
+    assert_equal ["Clark Kent"], development.above_average_salaries
+  end
   #
   # def test_add_review_to_employee
   #   employee_one = Employee.new(name: "Dutch Matrix", email: "Commando@example.com", phone: "919-877-1276", salary: 90000)

@@ -33,4 +33,14 @@ class Department < ActiveRecord::Base
   def alphabetize_a
     employees.order(:name).map {|a| a.name}
   end
+
+  def above_average_salaries
+    array = []
+    avg = salary_total.to_f/employees.count
+    employees.each { |e|
+      if e.salary > avg
+        array << e.name
+      end }
+      array
+  end
 end
