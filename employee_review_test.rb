@@ -89,32 +89,21 @@ class EmployeeReviewTest < Minitest::Test
     assert department.add_employee(employee_two)
     assert_equal 100000, department.salary_total
   end
-  #
-  # def test_add_review_to_employee
-  #   employee_one = Employee.new(name: "Dutch Matrix", email: "Commando@example.com", phone: "919-877-1276", salary: 90000)
-  #
-  #   assert employee_one.add_review("Zeke is a very positive person and encourages those around him,
-  #   but he has not done well technically this year.  There are two areas in which Zeke has room
-  #   for improvement.  First, when communicating verbally (and sometimes in writing), he has a
-  #   tendency to use more words than are required.  This conversational style does put people at
-  #   ease, which is valuable, but it often makes the meaning difficult to isolate, and can cause
-  #   confusion.")
-  # end
-  #
-  # def test_add_satisfactory_boolean
-  #   employee_one = Employee.new(name: "Dutch Matrix", email: "Commando@example.com", phone: "919-877-1276", salary: 90000)
-  #
-  #   assert employee_one.satisfactory?(true)
-  #   assert_equal true, employee_one.satisfactory
-  # end
-  #
-  # def test_employee_can_get_raise
-  #   employee_one = Employee.new(name: "Dutch Matrix", email: "Commando@example.com", phone: "919-877-1276", salary: 90000)
-  #
-  #   assert employee_one.give_raise(10000.95)
-  #   assert_equal 100000.95, employee_one.salary
-  # end
-  #
+
+  def test_add_satisfactory_boolean
+    employee_one = Employee.create(name: "Dutch Matrix", email: "Commando@example.com", phone_number: "919-877-1276", salary: 90000)
+
+    assert employee_one.satisfactory?(true)
+    assert_equal true, employee_one.satisfactory
+  end
+
+  def test_employee_can_get_raise
+    employee_one = Employee.create(name: "Dutch Matrix", email: "Commando@example.com", phone_number: "919-877-1276", salary: 90000)
+
+    assert employee_one.give_raise(10000.95)
+    assert_equal 100000.95, employee_one.salary
+  end
+
   # def test_giving_department_a_raise
   #   development = Department.new("Development")
   #   sales = Department.new("sales")
@@ -138,6 +127,18 @@ class EmployeeReviewTest < Minitest::Test
   #   assert_equal 10000.00, employee_three.salary
   #   assert_equal 150000.00, employee_sales.salary
   #
+  # end
+
+  #
+  # def test_add_review_to_employee
+  #   employee_one = Employee.new(name: "Dutch Matrix", email: "Commando@example.com", phone: "919-877-1276", salary: 90000)
+  #
+  #   assert employee_one.add_review("Zeke is a very positive person and encourages those around him,
+  #   but he has not done well technically this year.  There are two areas in which Zeke has room
+  #   for improvement.  First, when communicating verbally (and sometimes in writing), he has a
+  #   tendency to use more words than are required.  This conversational style does put people at
+  #   ease, which is valuable, but it often makes the meaning difficult to isolate, and can cause
+  #   confusion.")
   # end
   #
   # def test_for_positive_reviews_and_set_satisfactory

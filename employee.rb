@@ -14,11 +14,11 @@ class Employee < ActiveRecord::Base
 
   # sets boolean determining if employee is satisfactory or not
   def satisfactory?(bool)
-      @satisfactory = bool
+      self.satisfactory = bool
   end
 
   def give_raise(amount)
-    @salary += amount
+    self.salary += amount
   end
 
   def evaluate_review
