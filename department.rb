@@ -41,6 +41,12 @@ class Department < ActiveRecord::Base
       if e.salary > avg
         array << e.name
       end }
-      array
+    array
+  end
+
+  def pal_names
+    palindromes = employees.select { |e|
+      e.name if e.name.reverse.downcase == e.name.downcase }
+    palindromes.map { |p| p.name }
   end
 end
