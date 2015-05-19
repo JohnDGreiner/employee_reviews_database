@@ -1,6 +1,10 @@
-require './db_require'
+require "active_record"
 
-class Department <ActiveRecord::Base
+ActiveRecord::Base.establish_connection(
+  adapter: 'sqlite3',
+  database: 'employee_reviews_db.sqlite3')
+
+class Department < ActiveRecord::Base
   has_many :employees
 
   def add_employee(employee)

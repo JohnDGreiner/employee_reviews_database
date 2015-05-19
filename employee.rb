@@ -1,4 +1,10 @@
-class Employee
+require "active_record"
+
+ActiveRecord::Base.establish_connection(
+  adapter: 'sqlite3',
+  database: 'employee_reviews_db.sqlite3')
+
+class Employee < ActiveRecord::Base
   attr_reader :name, :email, :phone, :salary, :satisfactory
 
   def initialize(name:, email:, phone:, salary:)
@@ -117,7 +123,7 @@ class Employee
       else
         @satisfactory = true
       end
-    
+
   end
 
 
