@@ -50,22 +50,12 @@ class Department < ActiveRecord::Base
     palindromes.map { |p| p.name }
   end
 
-  def most_employees?
-    department_n = Department.count
-    num = 1
-    total = 0
-    hold_total = 0
-    d_id = 0
-
-    department_n.times do
-      total =  Employee.where(department_id: num ).count
-      if hold_total < total
-        hold_total = total
-        d_id = num
-      end
-      num += 1
+  def self.most_employees?
+    biggest_so_far = Department.first
+    Department.all.each do |d|
+      biggest_so_far = d if d.employees_count > biggest_so_far.employees_count
     end
-    Department.find(d_id).name
+    biggest_so_far
   end
 
   def move_employees(dep)
