@@ -100,9 +100,10 @@ class EmployeeReviewTest < Minitest::Test
 
   def test_employee_can_get_raise
     employee_one = Employee.create(name: "Dutch Matrix", email: "Commando@example.com", phone_number: "919-877-1276", salary: 90000)
+    employee_one.satisfactory?(true)
 
-    assert employee_one.give_raise(10000.95)
-    assert_equal 100000.95, employee_one.salary
+    assert employee_one.give_raise(10)
+    assert_equal 99000, employee_one.salary.to_f
   end
 
   def test_giving_department_a_raise
@@ -121,12 +122,12 @@ class EmployeeReviewTest < Minitest::Test
     assert development.add_employee(employee_two)
     assert development.add_employee(employee_three)
     assert sales.add_employee(employee_sales)
-    assert development.give_raise(10000) {|e| e.salary > 10000}
-    assert sales.give_raise(50000) {|e| e.satisfactory == true}
-    assert_equal 95000.00, employee_one.salary
+    assert development.give_raise(10) {|e| e.salary > 10000}
+    assert sales.give_raise(10) {|e| e.satisfactory == true}
+    assert_equal 99000.00, employee_one.salary
     assert_equal 55000.00, employee_two.salary
     assert_equal 10000.00, employee_three.salary
-    assert_equal 150000.00, employee_sales.salary
+    assert_equal 110000.00, employee_sales.salary
 
   end
 
@@ -244,11 +245,13 @@ class EmployeeReviewTest < Minitest::Test
     development.add_employee(employee_three)
     sales.add_employee(employee_sales)
 
-    development.per_raise(0.10)
-    assert_equal 99000.00, employee_one.salary
-    assert_equal 55000.00, employee_two.salary
-    assert_equal 10000.00, employee_three.salary
-    assert_equal 110000.00, employee_sales.salary
+    development.give_raise(10) {|e| e.satisfactory == true}
+    sales.give_raise(10) {|e| e.satisfactory == true}
+
+    assert_equal 99000.00, employee_one.salary.to_f
+    assert_equal 55000.00, employee_two.salary.to_f
+    assert_equal 10000.00, employee_three.salary.to_f
+    assert_equal 110000.00, employee_sales.salary.to_f
 
   end
 

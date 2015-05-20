@@ -17,8 +17,13 @@ class Employee < ActiveRecord::Base
       self.satisfactory = bool
   end
 
-  def give_raise(amount)
-    self.salary += amount
+  def give_raise(percent)
+    if self.satisfactory
+      self.salary += (salary*percent/100)
+    else
+      self.salary
+    end
+
   end
 
   def evaluate_review
