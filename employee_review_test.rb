@@ -193,6 +193,22 @@ class EmployeeReviewTest < Minitest::Test
 
     assert_equal ["Bob"], development.pal_names
   end
+
+  def test_department_with_most_employees
+    development = Department.create(name: "Development")
+    sales = Department.create(name: "sales")
+    employee_one = Employee.create(name: "Clark Kent", email: "superman@example.com", phone_number: "111-111-1111", salary: 90000)
+    employee_two = Employee.create(name: "Barry Allen", email: "flash@example.com", phone_number: "222-222-2222", salary: 50000)
+    employee_three = Employee.create(name: "Oliver Queen", email: "green@example.com", phone_number: "333-333-3333", salary: 10000)
+    employee_sales = Employee.create(name: "Tony Stark", email: "ironman@example.com", phone_number: "444-444-4444", salary: 100000)
+    development.add_employee(employee_one)
+    development.add_employee(employee_two)
+    development.add_employee(employee_three)
+    sales.add_employee(employee_sales)
+
+    assert_equal "Development", sales.most_employees?
+
+  end
   #
   # def test_add_review_to_employee
   #   employee_one = Employee.new(name: "Dutch Matrix", email: "Commando@example.com", phone: "919-877-1276", salary: 90000)

@@ -49,4 +49,17 @@ class Department < ActiveRecord::Base
       e.name if e.name.reverse.downcase == e.name.downcase }
     palindromes.map { |p| p.name }
   end
+
+  def most_employees?
+    # array = Department.all
+    # array.each {|d| d.employees_count}
+    #p Employee.where(department_id: Department.all).count
+    #Employee.each{ |e,i| e.where(department_id:i)}
+    # department_max = Department.first
+    # Department.all
+    p Employee.each {|e| e.name}
+
+
+  end
+
 end
