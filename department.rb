@@ -51,13 +51,24 @@ class Department < ActiveRecord::Base
   end
 
   def most_employees?
-    # array = Department.all
-    # array.each {|d| d.employees_count}
-    #p Employee.where(department_id: Department.all).count
-    #Employee.each{ |e,i| e.where(department_id:i)}
-    # department_max = Department.first
-    # Department.all
-    p Employee.each {|e| e.name}
+    department_n = Department.count
+    num = 1
+    total = 0
+    hold_total = 0
+    d_id = 0
+
+
+    department_n.times do
+      total =  Employee.where(department_id: num ).count
+      if hold_total < total
+        hold_total = total
+        d_id = num
+      end
+      num += 1
+    end
+
+    Department.find(d_id).name
+
 
 
   end
