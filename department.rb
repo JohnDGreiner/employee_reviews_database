@@ -57,7 +57,6 @@ class Department < ActiveRecord::Base
     hold_total = 0
     d_id = 0
 
-
     department_n.times do
       total =  Employee.where(department_id: num ).count
       if hold_total < total
@@ -66,10 +65,15 @@ class Department < ActiveRecord::Base
       end
       num += 1
     end
-
     Department.find(d_id).name
+  end
 
-
+  def move_employees(dep)
+    dep_id = 0
+    dep_id = dep.id
+    employees.each { |e|
+      e.department_id = dep_id
+      e.save}
 
   end
 
