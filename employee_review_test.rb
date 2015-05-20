@@ -207,7 +207,7 @@ class EmployeeReviewTest < Minitest::Test
     development.add_employee(employee_three)
     sales.add_employee(employee_sales)
 
-    assert_equal "Development", sales.most_employees?
+    assert_equal development, Department.most_employees?
 
   end
 
