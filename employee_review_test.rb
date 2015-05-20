@@ -228,4 +228,29 @@ class EmployeeReviewTest < Minitest::Test
 
   end
 
+  def test_give_percent_raise_to_all_employees
+    development = Department.create(name: "Development")
+    sales = Department.create(name: "sales")
+    employee_one = Employee.create(name: "Clark Kent", email: "superman@example.com", phone_number: "111-111-1111", salary: 90000)
+    employee_two = Employee.create(name: "Barry Allen", email: "flash@example.com", phone_number: "222-222-2222", salary: 50000)
+    employee_three = Employee.create(name: "Oliver Queen", email: "green@example.com", phone_number: "333-333-3333", salary: 10000)
+    employee_sales = Employee.create(name: "Tony Stark", email: "ironman@example.com", phone_number: "444-444-4444", salary: 100000)
+    employee_one.satisfactory?(true)
+    employee_two.satisfactory?(true)
+    employee_three.satisfactory?(false)
+    employee_sales.satisfactory?(true)
+    development.add_employee(employee_one)
+    development.add_employee(employee_two)
+    development.add_employee(employee_three)
+    sales.add_employee(employee_sales)
+
+    development.per_raise(0.10)
+    assert_equal 99000.00, employee_one.salary
+    assert_equal 55000.00, employee_two.salary
+    assert_equal 10000.00, employee_three.salary
+    assert_equal 110000.00, employee_sales.salary
+
+  end
+
+
 end

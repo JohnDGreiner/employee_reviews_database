@@ -74,7 +74,12 @@ class Department < ActiveRecord::Base
     employees.each { |e|
       e.department_id = dep_id
       e.save}
+  end
 
+  def per_raise(per)
+    Employee.find_each {|e|
+      e.salary += (e.salary * per)
+      e.save}
   end
 
 end
